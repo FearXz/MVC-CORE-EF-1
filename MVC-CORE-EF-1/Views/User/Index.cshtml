@@ -61,9 +61,8 @@
                 @Html.DisplayFor(modelItem => item.PartitaIva)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUser">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUser">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUser">Delete</a>
+                <a asp-action="EditUser" asp-route-id="@item.IdUser">Edit</a> 
+                <a asp-action="DeleteUser" asp-route-id="@item.IdUser">Delete</a>
             </td>
         </tr>
 }

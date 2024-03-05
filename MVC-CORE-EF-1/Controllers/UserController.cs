@@ -57,5 +57,38 @@ namespace MVC_CORE_EF_1.Controllers
                 return View(user);
             }
         }
+
+        public IActionResult EditUser(int id)
+        {
+            User user = _db.Users.Find(id);
+            return View(user);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditUser(User user)
+        {
+            if (ModelState.IsValid && (user.TipoCliente.ToLower() == "azienda" || user.TipoCliente.ToLower() == "privato") && ((user.CodiceFiscale.IsNullOrEmpty() && user.PartitaIva != null) || (user.PartitaIva.IsNullOrEmpty() && user.CodiceFiscale != null)))
+            {
+
+
+                try
+                {
+                    _db.Users.Update(user);
+                    _db.SaveChanges();
+                    TempData["Success"] = $"{user.Nominativo} è stato modificato con successo";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["Error"] = "L'username è già stato utilizzato";
+                    ModelState.AddModelError("Exception", ex.Message);
+                    return View(user);
+                }
+            }
+            else
+            {
+                return View(user);
+            }
+        }
     }
 }
