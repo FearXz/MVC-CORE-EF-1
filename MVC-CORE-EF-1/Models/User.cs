@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC_CORE_EF_1.Models
 {
@@ -6,6 +7,8 @@ namespace MVC_CORE_EF_1.Models
     {
         [Key]
         public int IdUser { get; set; }
+        [Required]
+        [Remote(action: "CheckUsername", controller: "Login", ErrorMessage = "Username già esistente")]
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }

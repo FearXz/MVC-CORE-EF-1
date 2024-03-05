@@ -13,6 +13,8 @@ namespace MVC_CORE_EF_1.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IAuthenticationSchemeProvider _authenticationSchemeProvider;
 
+        public object JsonRequestBehavior { get; private set; }
+
         public UserController(ApplicationDbContext db, IAuthenticationSchemeProvider authenticationSchemeProvider)
         {
             _db = db;
@@ -90,5 +92,6 @@ namespace MVC_CORE_EF_1.Controllers
                 return View(user);
             }
         }
+
     }
 }

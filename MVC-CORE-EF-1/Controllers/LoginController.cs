@@ -101,5 +101,12 @@ namespace MVC_CORE_EF_1.Controllers
                 return View(user);
             }
         }
+
+
+        public async Task<IActionResult> CheckUsername(string username)
+        {
+            bool doesUsernameExist = await _db.Users.AnyAsync(user => user.Username == username);
+            return Json(!doesUsernameExist);
+        }
     }
 }
