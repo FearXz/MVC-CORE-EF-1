@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MVC_CORE_EF_1.Data;
 using MVC_CORE_EF_1.Models;
 using System.Security.Claims;
@@ -29,8 +30,9 @@ namespace MVC_CORE_EF_1.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel model)
         {
+            string hashedPassword = PasswordManager.HashPassword(model.Password);
             var user = await _db.Users
-                .FirstOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password);
+                .FirstOrDefaultAsync(u => u.Username == model.Username && u.Password == hashedPassword);
 
             if (user == null)
             {
@@ -65,6 +67,39 @@ namespace MVC_CORE_EF_1.Controllers
             TempData["success"] = "Sei stato disconnesso";
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register([Bind("Username,Password,TipoCliente,Nominativo,CodiceFiscale,PartitaIva")] User user)
+        {
+            if (ModelState.IsValid && (user.TipoCliente.ToLower() == "azienda" || user.TipoCliente.ToLower() == "privato") && ((user.CodiceFiscale.IsNullOrEmpty() && user.PartitaIva != null) || (user.PartitaIva.IsNullOrEmpty() && user.CodiceFiscale != null)))
+            {
+                try
+                {
+                    string HashedPassword = PasswordManager.HashPassword(user.Password);
+                    user.Password = HashedPassword;
+                    _db.Users.Add(user);
+
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["Error"] = "L'username è già stato utilizzato";
+                    ModelState.AddModelError("Exception", ex.Message);
+                    return View(user);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("TipoCliente", "Il tipo cliente deve essere azienda o privato");
+                return View(user);
+            }
         }
     }
 }

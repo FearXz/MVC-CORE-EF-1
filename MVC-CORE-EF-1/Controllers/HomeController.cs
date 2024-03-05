@@ -17,8 +17,7 @@ namespace MVC_CORE_EF_1.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public IActionResult NOPE()
         {
             return View();
         }

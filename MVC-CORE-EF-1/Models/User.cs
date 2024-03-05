@@ -10,7 +10,9 @@ namespace MVC_CORE_EF_1.Models
         [Required]
         public string Password { get; set; }
         [Required]
-        public string Role { get; set; }
+        public string Nominativo { get; set; }
+        [Required]
+        public string Role { get; set; } = UserRole.USER;
         [Required]
         public string TipoCliente { get; set; }
         public string? CodiceFiscale { get; set; }

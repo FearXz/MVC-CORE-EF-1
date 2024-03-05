@@ -11,7 +11,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         .AddCookie(options =>
         {
             options.LoginPath = "/Login"; // Il percorso al tuo controller di login
+            options.AccessDeniedPath = "/Home/NOPE"; // Il percorso al tuo controller di accesso negato
         });
+
 
 
 var app = builder.Build();
