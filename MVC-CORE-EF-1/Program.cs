@@ -13,8 +13,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
             options.LoginPath = "/Login"; // Il percorso al tuo controller di login
             options.AccessDeniedPath = "/Home/NOPE"; // Il percorso al tuo controller di accesso negato
         });
-
-
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "it-IT", "en-US", "fr" };
+    options.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
 
 var app = builder.Build();
 
