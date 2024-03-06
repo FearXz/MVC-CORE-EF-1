@@ -18,7 +18,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="StatoSpedizione" class="control-label"></label>
-                <input asp-for="StatoSpedizione" class="form-control" />
+                <select asp-for="StatoSpedizione" class="form-control">
+                    <option value="In Transito">In Transito</option>
+                    <option value="In Consegna">In Consegna</option>
+                    <option value="Consegnato">Consegnato</option>
+                    <option value="Non Consegnato">Non Consegnato</option>
+                </select>
                 <span asp-validation-for="StatoSpedizione" class="text-danger"></span>
             </div>
             <div class="form-group">

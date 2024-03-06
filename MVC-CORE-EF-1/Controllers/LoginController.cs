@@ -44,6 +44,7 @@ namespace MVC_CORE_EF_1.Controllers
         {
             new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.Role, user.Role),
+            new Claim(ClaimTypes.NameIdentifier, user.IdUser.ToString())
         };
 
             var claimsIdentity = new ClaimsIdentity(

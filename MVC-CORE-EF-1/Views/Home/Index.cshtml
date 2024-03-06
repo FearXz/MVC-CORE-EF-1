@@ -6,3 +6,48 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+
+            async function FetchShippingToday() {
+                try {
+                    const response = await fetch('/Home/FetchShippingToday');
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            async function FetchInConsegna() {
+                try {
+                    const response = await fetch('/Home/FetchInConsegna');
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+            async function FetchPerDestinazione() {
+                try {
+                    const response = await fetch('/Home/FetchPerDestinazione');
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            FetchShippingToday();
+            FetchInConsegna();
+            FetchPerDestinazione();
+        });
+    </script>
+
+
+}

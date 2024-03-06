@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVC_CORE_EF_1.Models.ShippingDetail>
+
+@{
+    ViewData["Title"] = "SearchShippingDetails";
+}
+
+<h1>SearchShippingDetails</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StatoSpedizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LuogoCorrente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoteSpedizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAggiornamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipping)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatoSpedizione)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuogoCorrente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoteSpedizione)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAggiornamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shipping.IndirizzoDestinatario)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

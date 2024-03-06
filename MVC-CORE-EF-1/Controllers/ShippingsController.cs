@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_CORE_EF_1.Data;
@@ -6,6 +7,7 @@ using MVC_CORE_EF_1.Models;
 
 namespace MVC_CORE_EF_1.Controllers
 {
+    [Authorize(Roles = UserRole.ADMIN)]
     public class ShippingsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,10 +32,7 @@ namespace MVC_CORE_EF_1.Controllers
                 return NotFound();
             }
 
-            var shipping = await _context.Shippings
-                .Include(s => s.User)
-                .Include(s => s.ShippingDetails)
-                .FirstOrDefaultAsync(m => m.IdSpedizione == id);
+            var shipping = await _context.Shippings.Include(s => s.User).Include(s => s.ShippingDetails).FirstOrDefaultAsync(m => m.IdSpedizione == id);
             if (shipping == null)
             {
                 return NotFound();
@@ -138,10 +137,10 @@ namespace MVC_CORE_EF_1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult CreateStatus(int idSpedizione)
+        public IActionResult CreateStatus(int id)
         {
 
-            ViewBag.IdSpedizione = idSpedizione;
+            ViewBag.IdSpedizione = id;
             return View();
         }
 

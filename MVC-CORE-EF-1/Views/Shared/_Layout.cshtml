@@ -31,10 +31,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SearchShipping">Le Tue Spedizioni</a>
+                            </li>
+                        }
                         @if (User.IsInRole(UserRole.ADMIN))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Shippings" asp-action="Index">Gestisci Spedizioni</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated)

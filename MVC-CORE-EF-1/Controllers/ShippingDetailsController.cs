@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_CORE_EF_1.Data;
@@ -6,6 +7,7 @@ using MVC_CORE_EF_1.Models;
 
 namespace MVC_CORE_EF_1.Controllers
 {
+    [Authorize(Roles = UserRole.ADMIN)]
     public class ShippingDetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
