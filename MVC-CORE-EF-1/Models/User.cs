@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MVC_CORE_EF_1.Models
 {
@@ -8,7 +7,6 @@ namespace MVC_CORE_EF_1.Models
         [Key]
         public int IdUser { get; set; }
         [Required]
-        [Remote(action: "CheckUsername", controller: "Login", ErrorMessage = "Username già esistente")]
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
@@ -20,5 +18,7 @@ namespace MVC_CORE_EF_1.Models
         public string TipoCliente { get; set; }
         public string? CodiceFiscale { get; set; }
         public string? PartitaIva { get; set; }
+        public virtual ICollection<Shipping> Shippings { get; set; }
     }
 }
+

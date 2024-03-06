@@ -77,7 +77,7 @@ namespace MVC_CORE_EF_1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Register([Bind("Username,Password,TipoCliente,Nominativo,CodiceFiscale,PartitaIva")] User user)
         {
-            if (ModelState.IsValid && (user.TipoCliente.ToLower() == "azienda" || user.TipoCliente.ToLower() == "privato") && ((user.CodiceFiscale.IsNullOrEmpty() && user.PartitaIva != null) || (user.PartitaIva.IsNullOrEmpty() && user.CodiceFiscale != null)))
+            if ((user.TipoCliente.ToLower() == "azienda" || user.TipoCliente.ToLower() == "privato") && ((user.CodiceFiscale.IsNullOrEmpty() && user.PartitaIva != null) || (user.PartitaIva.IsNullOrEmpty() && user.CodiceFiscale != null)))
             {
                 try
                 {

@@ -1,0 +1,98 @@
+﻿@model MVC_CORE_EF_1.Models.Shipping
+
+@{
+    ViewData["Title"] = "Details";
+
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Shipping</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataSpedizione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataSpedizione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PesoSpedizione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PesoSpedizione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IndirizzoDestinatario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IndirizzoDestinatario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NominativoDestinatario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NominativoDestinatario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CostoSpedizione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CostoSpedizione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataConsegna)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataConsegna)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Nominativo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.Nominativo)
+        </dd>
+    </dl>
+</div>
+@foreach(var dettaglio in Model.ShippingDetails)
+{
+    <div>
+        <h4>Dettaglio Spedizione</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(modelItem => dettaglio.StatoSpedizione)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(modelItem => dettaglio.StatoSpedizione)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(modelItem => dettaglio.LuogoCorrente)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(modelItem => dettaglio.LuogoCorrente)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(modelItem => dettaglio.NoteSpedizione)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => dettaglio.NoteSpedizione)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(modelItem => dettaglio.DataAggiornamento)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => dettaglio.DataAggiornamento)
+            </dd>
+
+
+        </dl>
+    </div>
+}
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdSpedizione">Edit</a> |
+    <a asp-action="CreateStatus"  asp-route-id="@Model?.IdSpedizione">Create Status</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -10,6 +10,8 @@ namespace MVC_CORE_EF_1.Data
 
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Shipping> Shippings { get; set; }
+        public DbSet<ShippingDetail> ShippingDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
