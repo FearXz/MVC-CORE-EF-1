@@ -1,19 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@if (User.IsInRole(UserRole.ADMIN))
+{
+    <div class="text-center">
 
-<div class="text-center">
+        <h5 class="card-title">Spedizioni in Giornata</h5>
+        <div id="FetchShippingToday" class="d-flex"></div>
 
-    <h5 class="card-title">Spedizioni in Giornata</h5>
-    <div id="FetchShippingToday" class="d-flex"></div>
+        <h5 class="card-title">In Consegna Oggi</h5>
+        <div id="FetchInConsegna" class="d-flex fs-1"></div>
 
-    <h5 class="card-title">In Consegna Oggi</h5>
-    <div id="FetchInConsegna" class="d-flex fs-1"></div>
+        <h5 class="card-title">Raggruppate per Destinazione</h5>
+        <div id="FetchPerDestinazione" class="d-flex"></div>
 
-    <h5 class="card-title">Raggruppate per Destinazione</h5>
-    <div id="FetchPerDestinazione" class="d-flex"></div>
+    </div>
+}
 
-</div>
 
 @section Scripts {
     @{
