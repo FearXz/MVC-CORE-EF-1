@@ -3,8 +3,16 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h5 class="card-title">Spedizioni in Giornata</h5>
+    <div id="FetchShippingToday" class="d-flex"></div>
+
+    <h5 class="card-title">In Consegna Oggi</h5>
+    <div id="FetchInConsegna" class="d-flex fs-1"></div>
+
+    <h5 class="card-title">Raggruppate per Destinazione</h5>
+    <div id="FetchPerDestinazione" class="d-flex"></div>
+
 </div>
 
 @section Scripts {
@@ -18,17 +26,33 @@
                 try {
                     const response = await fetch('/Home/FetchShippingToday');
                     const data = await response.json();
+                    console.log("FetchShippingToday");
                     console.log(data);
+
+                    const container = $('#FetchShippingToday');
+
+                    container.empty();
+
+                    data.forEach(item => {
+                        container.append(`
+                                        <div class="card" style="width: 18rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Spedizioni in Giornata</h5>
+                                                <p>idSpedizione: ${item.idSpedizione}<br/>dataSpedizione: ${item.dataSpedizione}<br/>pesoSpedizione: ${item.pesoSpedizione}<br/>indirizzo: ${item.indirizzoDestinatario}<br/>Nominativo: ${item.nominativoDestinatario}<br/>Costo: ${item.costoSpedizione}<br/>DataConsegna: ${item.dataConsegna}</p>
+                                            </div>
+                                        </div>
+                                    `);
+                    });
                 } catch (error) {
                     console.error('Error:', error);
                 }
             }
-
             async function FetchInConsegna() {
                 try {
                     const response = await fetch('/Home/FetchInConsegna');
                     const data = await response.json();
                     console.log(data);
+                    $('#FetchInConsegna').append('<p>Numero Spedizione in stato di consegna: ' + data + '</p>');
                 } catch (error) {
                     console.error('Error:', error);
                 }
@@ -37,7 +61,22 @@
                 try {
                     const response = await fetch('/Home/FetchPerDestinazione');
                     const data = await response.json();
+
                     console.log(data);
+                    const container = $('#FetchPerDestinazione');
+
+                    container.empty();
+
+                    data.forEach(item => {
+                        container.append(`
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Raggruppate per Destinazione</h5>
+                                <p>Destinazione: ${item.destinazione}<br/>Numero Spedizioni: ${item.numeroSpedizioni}</p>
+                            </div>
+                        </div>
+                    `);
+                    });
                 } catch (error) {
                     console.error('Error:', error);
                 }
